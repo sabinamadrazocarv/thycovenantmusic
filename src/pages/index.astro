@@ -1,0 +1,196 @@
+---
+import '../styles/global.css';
+import { GHL_FORM_ID } from '../config.mjs';
+
+const signupUrl = GHL_FORM_ID ? `https://api.leadconnectorhq.com/widget/form/${GHL_FORM_ID}` : '';
+
+const ytSearch = (title: string) =>
+  `https://music.youtube.com/search?q=${encodeURIComponent('THY CØVENANT ' + title)}`;
+const spotifyArtist = 'https://open.spotify.com/artist/4NpvIaV4jZo7FCiFv1zGAe';
+
+const releases = [
+  { type: 'ALBUM', n: '01', title: 'Let My Prayer Rise', text: 'Twelve spoken prayers for the life you’re living.', img: '/let-my-prayer-rise.jpg', cls: 'art-prayer', link: spotifyArtist },
+  { type: 'SINGLE', n: '02', title: 'Heal Me', text: 'A prayer born in a moment of pain.', img: '/heal-me.jpg', cls: 'art-heal', link: spotifyArtist },
+  { type: 'SINGLE', n: '03', title: 'Beatitudes', text: 'Words of faith, carried by sound.', img: '/beatitudes-cover.jpg', cls: 'art-beat', link: 'https://open.spotify.com/track/3lqbbVg5Ny08O4nwPJ2PMD' },
+];
+
+const tracks = [
+  'A Prayer for My Future Spouse', 'A Prayer for My Marriage', 'Lord, Use Me',
+  'Prayer Against Curses', 'Prayer Against Demonic Attack', 'Prayer for Healing',
+  'Prayer Against Sin', 'Prayer for Healing II', 'Prayer For My Finances',
+  'Prayer for Repentance', 'Prayer for the Armour of God', 'Prayer for the Kingdom',
+];
+
+const title = 'Thy Cøvenant | Music that brings you closer to God';
+const description = 'Faith, prayer and progressive electronic music. Discover the music and story of Thy Cøvenant.';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href="https://thycovenantmusic.com/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://thycovenantmusic.com/let-my-prayer-rise.jpg" />
+    <meta property="og:url" content="https://thycovenantmusic.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {signupUrl && <script is:inline src="https://link.msgsndr.com/js/form_embed.js" defer></script>}
+  </head>
+  <body>
+    <header>
+      <a class="brand logo" href="#top" aria-label="Thy Cøvenant home"><img src="/thy-covenant-logo.png" alt="Thy Cøvenant" /></a>
+      <nav aria-label="Main navigation"><a href="#music">Music</a><a href="#story">The story</a><a href="#connect">Connect</a></nav>
+      <a class="nav-cta" href="#music">Explore the Music</a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+          <div class="eyebrow"><span class="dot"></span> FAITH · FREQUENCY · FEELING</div>
+          <h1>Music that brings<br />you closer <em>to God.</em></h1>
+          <p>Music for the moments you need to feel closer to God—and free enough to move.</p>
+          <div class="actions"><a class="button light" href="#music">Explore the music <span>↗</span></a></div>
+        </div>
+        {signupUrl && (
+          <div class="hero-signup" id="join-the-circle">
+            <strong>Join the Circle</strong>
+            <p>Get unreleased music, prayers, and surprises in your inbox.</p>
+            <div class="signup-embed">
+              <iframe src={signupUrl} title="Join the Circle" id={`inline-${GHL_FORM_ID}-hero`} loading="lazy"></iframe>
+            </div>
+          </div>
+        )}
+        <div class="hero-mark" aria-hidden="true">
+          <div class="halo halo-one"></div>
+          <div class="halo halo-two"></div>
+          <span class="cross-shape" aria-hidden="true"></span>
+          <div class="hero-mark-caption">LET THE MUSIC<br />LIFT YOU UP</div>
+        </div>
+        <div class="hero-bottom"><span>PROGRESSIVE HOUSE / MELODIC TRANCE</span><span>SCROLL TO DISCOVER ↓</span></div>
+      </section>
+
+      <section class="intro">
+        <div class="section-index">01 / THE HEART BEHIND THE MUSIC</div>
+        <div>
+          <p class="intro-line">A little more <em>light.</em><br />A lot more <em>faith.</em></p>
+          <p class="intro-copy">Through electronic music and spoken prayer, Thy Cøvenant creates space to reflect, reconnect and rejoice.</p>
+        </div>
+      </section>
+
+      <section class="music section" id="music">
+        <div class="section-top">
+          <div>
+            <div class="section-index">02 / THE MUSIC</div>
+            <h2>Let it <em>move you.</em></h2>
+          </div>
+          <p>Electronic music for moving in faith, and spoken prayers for the quiet moments.</p>
+        </div>
+
+        <div class="releases">
+          {releases.map((r) => (
+            <article class="release">
+              <a class={`art ${r.cls}`} href={r.link} target="_blank" rel="noreferrer">
+                <img class="cover" src={r.img} alt={`${r.title} artwork`} loading="lazy" />
+              </a>
+              <div class="release-meta"><span>{r.type} · 2026</span><span>{r.n} / 03</span></div>
+              <h3>{r.title}</h3>
+              <p>{r.text}</p>
+              <a class="listen" href={ytSearch(r.title)} target="_blank" rel="noreferrer">LISTEN ON YOUTUBE MUSIC ↗</a>
+            </article>
+          ))}
+        </div>
+
+        <details class="tracklist">
+          <summary>Explore the Let My Prayer Rise tracklist <span>＋</span></summary>
+          <ol>
+            {tracks.map((t, i) => (
+              <li><span>{String(i + 1).padStart(2, '0')}</span>{t}</li>
+            ))}
+          </ol>
+        </details>
+
+        <div class="spotify-player">
+          <div>
+            <span class="section-index">LISTEN ON SPOTIFY</span>
+            <h3>Press play. Stay awhile.</h3>
+            <p>Explore Thy Cøvenant on Spotify.</p>
+            <a class="listen" href={spotifyArtist} target="_blank" rel="noreferrer">VIEW ARTIST PROFILE ↗</a>
+          </div>
+          <iframe
+            title="Thy Cøvenant on Spotify"
+            src="https://open.spotify.com/embed/artist/4NpvIaV4jZo7FCiFv1zGAe?utm_source=generator"
+            width="100%"
+            height="352"
+            loading="lazy"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+
+        <div class="platforms">
+          <span>LISTEN WHERE YOU LOVE</span>
+          <a href={spotifyArtist} target="_blank" rel="noreferrer">Spotify ↗</a>
+          <a href="https://music.amazon.com.br/artists/B0GKJ95D7X/thy-c%C3%B8venant" target="_blank" rel="noreferrer">Amazon Music ↗</a>
+          <a href="https://music.youtube.com/search?q=THY+C%C3%98VENANT" target="_blank" rel="noreferrer">YouTube Music ↗</a>
+        </div>
+      </section>
+
+      <section class="story section" id="story">
+        <div class="story-art">
+          <div class="story-cross cross-shape" aria-hidden="true"></div>
+          <div class="story-art-label">FAITH<br />IN MOTION <span>✦</span></div>
+        </div>
+        <div class="story-copy">
+          <div class="section-index">03 / THE STORY</div>
+          <h2>From searching<br />to <em>believing.</em></h2>
+          <p>I created Thy Cøvenant out of my own journey of faith. For years, I was an atheist and a seeker. Finding Christ gave me a new life and a new purpose for the music I love.</p>
+          <p>My electronic music draws on progressive house and melodic trance. But faith also meets us in quieter moments. That’s why I created Let My Prayer Rise, an album of spoken prayers for healing, marriage, protection, and the challenges we face every day. Whatever you’re listening to, my hope is that it brings you closer to God.</p>
+          <div class="signature">Faith you can feel. <span>✦</span></div>
+        </div>
+      </section>
+
+      <section class="belief section">
+        <div class="section-index">04 / THE PHILOSOPHY</div>
+        <div>
+          <h2>Music is a language<br /><em>the heart understands.</em></h2>
+          <p>I believe faith can be expressed through music and through prayer. Whether you’re looking for hope, a moment of peace, or a reason to dance, you’re welcome here.</p>
+        </div>
+        <div class="belief-star">✧</div>
+      </section>
+
+      <section class="connect section" id="connect">
+        <div class="connect-inner">
+          <div class="section-index">05 / STAY CLOSE</div>
+          <h2>Let’s keep the<br /><em>music &amp; faith</em> flowing.</h2>
+          {signupUrl ? (
+            <>
+              <p>Get unreleased music, prayers, and surprises in your inbox.</p>
+              <div class="signup-embed">
+                <iframe src={signupUrl} title="Join the Circle" id={`inline-${GHL_FORM_ID}-connect`} loading="lazy"></iframe>
+              </div>
+            </>
+          ) : (
+            <>
+              <p>Follow Thy Cøvenant on Spotify to hear new music and prayers first.</p>
+              <a class="button connect-follow" href={spotifyArtist} target="_blank" rel="noreferrer">Follow on Spotify <span>↗</span></a>
+            </>
+          )}
+        </div>
+        <div class="connect-star">✦</div>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        <a class="brand logo" href="#top" aria-label="Thy Cøvenant home"><img src="/thy-covenant-logo.png" alt="Thy Cøvenant" /></a>
+        <p>MUSIC THAT BRINGS YOU CLOSER TO GOD.</p>
+      </div>
+      <div class="footer-links"><a href="#music">Music</a><a href="#story">Story</a><a href="#connect">Connect</a></div>
+      <div class="footer-end">© 2026 THY CØVENANT</div>
+    </footer>
+  </body>
+</html>
